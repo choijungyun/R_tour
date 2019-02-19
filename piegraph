@@ -1,0 +1,6 @@
+slice <- sum_age_10_top6$n
+active <- sum_age_10_top6$활동내역
+pct <- round(slice/ sum(slice)*100)
+active <- paste(active, pct)
+active <- paste(active, "%", sep="")
+pie(slice, labels=active, main="10대 활동내역")
