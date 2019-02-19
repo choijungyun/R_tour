@@ -1,0 +1,31 @@
+
+#Rank_ age_10
+tour_age_10 <- tour %>% group_by(age) %>% filter(age ==0) %>% select(활동내역)
+sum_age_10 <- tour_age_10 %>%  group_by(활동내역) %>% summarise(n=n())
+sum_age_10 <- arrange(sum_age_10,desc(n))
+sum_age_10_top6 <- head(sum_age_10)
+#Rank_ age_20
+tour_age_20 <- tour %>% group_by(age) %>% filter(age ==1) %>% select(활동내역)
+sum_age_20 <- tour_age_20 %>%  group_by(활동내역) %>% summarise(n=n())
+sum_age_20 <- arrange(sum_age_20,desc(n))
+sum_age_20_top6 <- head(sum_age_20)
+#Rank_ age_30
+tour_age_30 <- tour %>% group_by(age) %>% filter(age ==2) %>% select(활동내역)
+sum_age_30 <- tour_age_30 %>%  group_by(활동내역) %>% summarise(n=n())
+sum_age_30 <- arrange(sum_age_30,desc(n))
+sum_age_30_top6 <- head(sum_age_30)
+#Rank_ age_40
+tour_age_40 <- tour %>% group_by(age) %>% filter(age ==3) %>% select(활동내역)
+sum_age_40 <- tour_age_40 %>%  group_by(활동내역) %>% summarise(n=n())
+sum_age_40 <- arrange(sum_age_40,desc(n))
+sum_age_40_top6 <- head(sum_age_40)
+#Rank_ age_50
+tour_age_50 <- tour %>% group_by(age) %>% filter(age ==4) %>% select(활동내역)
+sum_age_50 <- tour_age_50 %>%  group_by(활동내역) %>% summarise(n=n())
+sum_age_50 <- arrange(sum_age_50,desc(n))
+sum_age_50_top6 <- head(sum_age_50)
+#Rank_ age_60
+tour_age_60 <- tour %>% group_by(age) %>% filter(age ==5) %>% select(활동내역)
+sum_age_60 <- tour_age_60 %>%  group_by(활동내역) %>% summarise(n=n())
+sum_age_60 <- arrange(sum_age_60,desc(n))
+sum_age_60_top6 <- head(sum_age_60)
