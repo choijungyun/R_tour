@@ -1,0 +1,38 @@
+install.packages("readxl")
+install.packages("ggplot2")
+library("readxl")
+getwd()
+
+tour_all<- read_excel(("2017_외래관광객_실태조사.xlsx"))
+tour_all
+install.packages("dplyr")
+library("dplyr")
+library("ggplot2")
+
+#성별, 연령별, 동반 인원, 동반 유형 - 활동내역
+tour <- tour_all %>% select(c(sex, age, q7, xq7a1, xq7a2, xq7a3, xq7a4, xq7a5, q8b))
+View(tour)
+names(tour)<- c('sex','age', '동반자수', '혼자옴', '가족친지', '친구연인','직장동료', '기타', '활동내역')
+
+#성별 - 활동내역
+#남성 - 활동내역
+tour_M <-tour %>% group_by(sex) %>% filter(sex =="남") %>% select(활동내역)
+sum <- tour_M %>% group_by(활동내역) %>% summarise(n=n())
+sum
+tour_M_sum <- left_join(tour_M, sum, by=c("활동내역"="활동내역"))
+tour_M_sum <- unique(tour_M_sum)
+tour_M_sum <- rename(tour_M_sum, 
+                     sex = sex,
+                     활동내역= 활동내역,
+                     count = n)
+
+str(tour_M_sum$count)
+View(tour_M_sum)
+ggplot()+geom_bar(data=tour_M_sum, aes(x=활동내역, y=count), stat='identity')
+tour_MV <- ggplot(data=tour_M_sum, aes(x=reorder(활동내역,tour_M_sum$count), y=count)) + geom_bar(stat='identity')+ coord_flip()
+tour_MV <- tour_MV +labs(x='활동내역', y='수',title='남_활동내역') +theme(plot.title = element_text(size=18))
+tour_MV <- tour_MV + geom_text(aes(label=count), size=3, hjust=1.25, color = '#FFFFFF')
+tour_MV + geom_bar(data = tour_M_sum[tour_M_sum$활동내역=='쇼핑',], aes(x=활동내역, y=count),
+                   fill='#5CBED2',stat='identity')+ geom_text(aes(label=count), size=3, hjust=1.25, color = '#FFFFFF')
+View(tour_M)
+
